@@ -4,7 +4,7 @@ import bodyParser from "body-parser"
 
 // This creates an instance for express application.
 const app = express();
-const port = 3000;
+const port = process.env.port || 3000;
 
 let posts = [];
 let nextId = 1;
