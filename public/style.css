@@ -38,6 +38,27 @@ main {
   padding: 1.5rem;
 }
 
+.flash {
+  background: #dff0d8;
+  color: #3c763d;
+  padding: 10px 15px;
+  border: 1px solid #d6e9c6;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  animation: fadeOut 3s forwards;
+  animation-delay: 2s;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 ul {
   list-style: none;
   padding: 0;
