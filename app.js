@@ -20,18 +20,39 @@ app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
   res.render("index.ejs", { posts });
-})
+});
 
 app.get("/new", (req, res) => {
   res.render("new");
-})
+});
 
 app.post("/new", (req, res) => {
   const { title, content } = req.body;
   posts.push({id: nextId++, title, content});
   res.redirect("/");
-})
+});
+
+app.get("/edit/:id", (req, res) => {
+  const post = posts.find(p => p.id === parseInt(req.params.id));
+  if (!post)
+    return res.status(404).send("Post not found");
+  res.render("edit", { post });
+});
+
+app.post("/edit/:id", (req, res) => {
+  const post = posts.find(p => p.id === parseInt(req.params.id));
+  if (post) {
+    post.title = req.body.title;
+    post.content = req.body.content;
+  }
+  res.redirect("/");
+});
+
+app.post("/delete/:id", (req, res) => {
+  posts = posts.filter(p => p.id !== parseInt(req.params.id));
+  res.redirect("/");
+});
 
 app.listen(port, () => {
   console.log(`Server is running on https://localhost:${port}`);
-})
+});
