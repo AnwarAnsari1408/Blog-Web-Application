@@ -19,7 +19,17 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", {posts});
+  res.render("index.ejs", { posts });
+})
+
+app.get("/new", (req, res) => {
+  res.render("new");
+})
+
+app.post("/new", (req, res) => {
+  const { title, content } = req.body;
+  posts.push({id: nextId++, title, content});
+  res.redirect("/");
 })
 
 app.listen(port, () => {
